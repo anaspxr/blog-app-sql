@@ -1,64 +1,88 @@
 {
   "users": [
     {
+      "id": "111",
+      "name": "Admin",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
+      "id": "222",
+      "name": "Admin2",
+      "email": "admin2@gmail.com",
+      "password": "admin123",
+      "role": "admin"
+    },
+    {
       "id": "1",
       "name": "John Doe",
       "email": "john.doe@gmail.com",
-      "password": "password123"
+      "password": "password123",
+      "role": "user"
     },
     {
       "id": "2",
       "name": "Jane Smith",
       "email": "jane.smith@gmail.com",
-      "password": "password456"
+      "password": "password456",
+      "role": "author"
     },
     {
       "id": "3",
       "name": "Carlos Mendez",
       "email": "carlos.mendez@gmail.com",
-      "password": "password789"
+      "password": "password789",
+      "role": "author"
     },
     {
       "id": "4",
       "name": "Aisha Khan",
       "email": "aisha.khan@gmail.com",
-      "password": "password101"
+      "password": "password101",
+      "role": "user"
     },
     {
       "id": "5",
       "name": "Liu Wei",
       "email": "liu.wei@gmail.com",
-      "password": "password202"
+      "password": "password202",
+      "role": "user"
     },
     {
       "id": "6",
       "name": "Fatima Al-Farsi",
       "email": "fatima.alfarsi@gmail.com",
-      "password": "password303"
+      "password": "password303",
+      "role": "user"
     },
     {
       "id": "7",
       "name": "Raj Patel",
       "email": "raj.patel@gmail.com",
-      "password": "password404"
+      "password": "password404",
+      "role": "user"
     },
     {
       "id": "8",
       "name": "Sofia Rossi",
       "email": "sofia.rossi@gmail.com",
-      "password": "password505"
+      "password": "password505",
+      "role": "user"
     },
     {
       "id": "19a2",
       "name": "Anas",
       "email": "anasp@gmail.com",
-      "password": "ANAS"
+      "password": "ANAS",
+      "role": "user"
     },
     {
       "id": "9dd3",
       "name": "anas",
       "email": "anaspp@gmail.com",
-      "password": "anas"
+      "password": "anas",
+      "role": "user"
     }
   ]
 }

@@ -1,0 +1,64 @@
+{
+  "users": [
+    {
+      "id": "1",
+      "name": "John Doe",
+      "email": "john.doe@gmail.com",
+      "password": "password123"
+    },
+    {
+      "id": "2",
+      "name": "Jane Smith",
+      "email": "jane.smith@gmail.com",
+      "password": "password456"
+    },
+    {
+      "id": "3",
+      "name": "Carlos Mendez",
+      "email": "carlos.mendez@gmail.com",
+      "password": "password789"
+    },
+    {
+      "id": "4",
+      "name": "Aisha Khan",
+      "email": "aisha.khan@gmail.com",
+      "password": "password101"
+    },
+    {
+      "id": "5",
+      "name": "Liu Wei",
+      "email": "liu.wei@gmail.com",
+      "password": "password202"
+    },
+    {
+      "id": "6",
+      "name": "Fatima Al-Farsi",
+      "email": "fatima.alfarsi@gmail.com",
+      "password": "password303"
+    },
+    {
+      "id": "7",
+      "name": "Raj Patel",
+      "email": "raj.patel@gmail.com",
+      "password": "password404"
+    },
+    {
+      "id": "8",
+      "name": "Sofia Rossi",
+      "email": "sofia.rossi@gmail.com",
+      "password": "password505"
+    },
+    {
+      "id": "19a2",
+      "name": "Anas",
+      "email": "anasp@gmail.com",
+      "password": "ANAS"
+    },
+    {
+      "id": "9dd3",
+      "name": "anas",
+      "email": "anaspp@gmail.com",
+      "password": "anas"
+    }
+  ]
+}

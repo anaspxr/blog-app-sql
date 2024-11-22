@@ -85,10 +85,10 @@ export default function RegisterForm() {
   });
 
   return (
-    <div className="min-h-screen my-2 w-screen flex items-center justify-center">
+    <div className="min-h-screen w-screen flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full bg-white max-w-md rounded-md border shadow-sm mx-2 p-4 flex justify-center flex-col gap-4">
+        className="w-full bg-white max-w-lg rounded-md border shadow-sm m-2 p-4 flex justify-center flex-col gap-4">
         <h1 className="text-3xl font-semibold text-blue-600 text-center my-8">
           Sign Up
         </h1>

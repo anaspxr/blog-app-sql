@@ -2,7 +2,7 @@
   "users": [
     {
       "id": "111",
-      "name": "Admin",
+      "name": "John Smith",
       "email": "admin@gmail.com",
       "password": "admin123",
       "role": "admin"
@@ -40,7 +40,7 @@
       "name": "Aisha Khan",
       "email": "aisha.khan@gmail.com",
       "password": "password101",
-      "role": "user"
+      "role": "author"
     },
     {
       "id": "5",
@@ -61,7 +61,8 @@
       "name": "Raj Patel",
       "email": "raj.patel@gmail.com",
       "password": "password404",
-      "role": "user"
+      "role": "user",
+      "status": "blocked"
     },
     {
       "id": "8",

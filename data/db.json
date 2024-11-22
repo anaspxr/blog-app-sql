@@ -12,35 +12,40 @@
       "name": "Admin2",
       "email": "admin2@gmail.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "author",
+      "status": "blocked"
     },
     {
       "id": "1",
       "name": "John Doe",
       "email": "john.doe@gmail.com",
       "password": "password123",
-      "role": "user"
+      "role": "author",
+      "status": "blocked"
     },
     {
       "id": "2",
       "name": "Jane Smith",
       "email": "jane.smith@gmail.com",
       "password": "password456",
-      "role": "author"
+      "role": "author",
+      "status": "blocked"
     },
     {
       "id": "3",
       "name": "Carlos Mendez",
       "email": "carlos.mendez@gmail.com",
       "password": "password789",
-      "role": "author"
+      "role": "author",
+      "status": "blocked"
     },
     {
       "id": "4",
       "name": "Aisha Khan",
       "email": "aisha.khan@gmail.com",
       "password": "password101",
-      "role": "author"
+      "role": "author",
+      "status": "blocked"
     },
     {
       "id": "5",
@@ -54,7 +59,8 @@
       "name": "Fatima Al-Farsi",
       "email": "fatima.alfarsi@gmail.com",
       "password": "password303",
-      "role": "user"
+      "role": "user",
+      "status": "active"
     },
     {
       "id": "7",
@@ -62,14 +68,15 @@
       "email": "raj.patel@gmail.com",
       "password": "password404",
       "role": "user",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "8",
       "name": "Sofia Rossi",
       "email": "sofia.rossi@gmail.com",
       "password": "password505",
-      "role": "user"
+      "role": "user",
+      "isDeleted": true
     },
     {
       "id": "19a2",

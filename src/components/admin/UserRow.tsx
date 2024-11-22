@@ -1,6 +1,8 @@
 import { useState } from "react";
 import UserThreeDot from "./UserThreeDot";
 import UserStatus from "./UserStatus";
+import RoleSelector from "./RoleSelector";
+import { useAppSelector } from "@/lib/store/hooks";
 
 export default function UserRow({
   user,
@@ -13,29 +15,50 @@ export default function UserRow({
     status?: string;
   };
 }) {
-  const [role, setRole] = useState(user.role);
+  const [userData, setUserData] = useState(user);
+  const { user: admin } = useAppSelector((state) => state.user);
+
+  const [loadingStates, setLoadingStates] = useState({
+    role: false,
+    status: false,
+    delete: false,
+  });
 
   return (
     <tr className="border-b">
-      <td className="py-4 px-2">{user.name}</td>
-      <td className="py-4 px-2">{user.email}</td>
-      <td className="py-4 px-2">
-        <span
-          className={` text-sm py-1 px-2 rounded-full border
-        ${
-          role === "admin"
-            ? "bg-yellow-100 text-yellow-600 border-yellow-200"
-            : role === "author"
-            ? "bg-purple-100 text-purple-600 border-purple-200"
-            : "bg-blue-100 text-blue-600 border-blue-200"
-        }
-        `}>
-          {role.charAt(0).toUpperCase() + role.slice(1)}
-        </span>
+      <td className="py-4 px-2 sm:max-w-32">{user.name}</td>
+      <td className="py-4 px-2 sm:max-w-40 text-ellipsis whitespace-nowrap overflow-hidden">
+        {user.email}
       </td>
-      <td className="py-4 flex items-center justify-between">
-        <UserStatus initialStatus={user.status} />
-        <UserThreeDot userId={user.id} currentRole={role} setRole={setRole} />
+      <td className="py-4 px-2">
+        <RoleSelector
+          loading={loadingStates.role}
+          currentRole={userData.role}
+          setLoadingRole={(loading) =>
+            setLoadingStates((prev) => ({ ...prev, role: loading }))
+          }
+          userId={user.id}
+          setRole={(role: string) => setUserData({ ...userData, role })}
+        />
+      </td>
+      <td className="py-4 flex items-center h-full  justify-between">
+        <UserStatus
+          status={userData.status || ""}
+          setStatus={(status) => {
+            setUserData((prev) => ({ ...prev, status }));
+          }}
+          userId={user.id}
+          initialStatus={user.status}
+        />
+        {admin?.id !== user.id && (
+          <UserThreeDot
+            loadingStates={loadingStates}
+            setLoadingStates={setLoadingStates}
+            userId={user.id}
+            userData={userData}
+            setUserData={setUserData}
+          />
+        )}
       </td>
     </tr>
   );

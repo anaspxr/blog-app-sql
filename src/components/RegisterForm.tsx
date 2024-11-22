@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosErrorCatch } from "../api/axiosErrorCatch";
 import { registerUser } from "../api/actions/authActions";
+import { loginUser as loginUserReducer } from "../lib/store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const formFields: {
   label: string;
@@ -42,6 +44,7 @@ export default function RegisterForm() {
   const [isSubmitting, setSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const {
     values,
@@ -69,11 +72,12 @@ export default function RegisterForm() {
       setTimeout(async () => {
         // time out to simulate a server request
         try {
-          await registerUser({
+          const user = await registerUser({
             name: values.name,
             email: values.email,
             password: values.password,
           });
+          dispatch(loginUserReducer(user));
           navigate("/"); // after successful registration, user is logged in and redirected to home page
         } catch (error) {
           setApiError(axiosErrorCatch(error));

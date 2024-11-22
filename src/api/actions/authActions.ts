@@ -18,9 +18,10 @@ export const registerUser = async (userData: {
 
   // register the user
   const newUser = { ...userData, role: "user", status: "active" };
-  const { data } = await axiosInstance.post("/users", newUser);
-  console.log(data);
-  Cookies.set("user", JSON.stringify(data));
+  const { data: user } = await axiosInstance.post("/users", newUser);
+  console.log(user);
+  Cookies.set("user", JSON.stringify(user));
+  return user;
 };
 
 export const loginUser = async (userData: {
@@ -41,5 +42,13 @@ export const loginUser = async (userData: {
   }
   Cookies.set("user", JSON.stringify(user));
 
+  return user;
+};
+
+export const reLoginUser = async (id: string) => {
+  const { data: user } = await axiosInstance.get(`/users/${id}`);
+  if (!user) {
+    throw new Error("User not found.");
+  }
   return user;
 };

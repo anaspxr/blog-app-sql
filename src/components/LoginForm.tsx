@@ -5,6 +5,8 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosErrorCatch } from "../api/axiosErrorCatch";
 import { loginUser } from "../api/actions/authActions";
+import { loginUser as loginUserReducer } from "../lib/store/slices/userSlice";
+import { useDispatch } from "react-redux";
 
 const formFields: {
   label: string;
@@ -29,6 +31,7 @@ const formFields: {
 export default function LoginForm() {
   const [isSubmitting, setSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { values, errors, handleSubmit, touched, handleBlur, handleChange } =
@@ -47,7 +50,11 @@ export default function LoginForm() {
         setTimeout(async () => {
           // time out to simulate a server request
           try {
-            await loginUser({ email: values.email, password: values.password });
+            const user = await loginUser({
+              email: values.email,
+              password: values.password,
+            });
+            dispatch(loginUserReducer(user));
             navigate("/");
           } catch (error) {
             setApiError(axiosErrorCatch(error));

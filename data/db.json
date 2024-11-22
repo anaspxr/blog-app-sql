@@ -84,6 +84,14 @@
       "email": "anaspp@gmail.com",
       "password": "anas",
       "role": "user"
+    },
+    {
+      "id": "af11",
+      "name": "Anas",
+      "email": "Anas2@gmail.com",
+      "password": "anas",
+      "role": "user",
+      "status": "active"
     }
   ]
 }

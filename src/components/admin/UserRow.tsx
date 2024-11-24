@@ -30,7 +30,7 @@ export default function UserRow({
       <td className="py-4 px-2 sm:max-w-40 text-ellipsis whitespace-nowrap overflow-hidden">
         {user.email}
       </td>
-      <td className="py-4 px-2">
+      <td className="py-4 px-2 hidden sm:table-cell">
         <RoleSelector
           loading={loadingStates.role}
           currentRole={userData.role}
@@ -41,15 +41,17 @@ export default function UserRow({
           setRole={(role: string) => setUserData({ ...userData, role })}
         />
       </td>
-      <td className="py-4 flex items-center h-full  justify-between">
-        <UserStatus
-          status={userData.status || ""}
-          setStatus={(status) => {
-            setUserData((prev) => ({ ...prev, status }));
-          }}
-          userId={user.id}
-          initialStatus={user.status}
-        />
+      <td className="py-4 flex items-center h-full justify-between">
+        <div className="hidden sm:block">
+          <UserStatus
+            status={userData.status || ""}
+            setStatus={(status) => {
+              setUserData((prev) => ({ ...prev, status }));
+            }}
+            userId={user.id}
+            initialStatus={user.status}
+          />
+        </div>
         {admin?.id !== user.id && (
           <UserThreeDot
             loadingStates={loadingStates}

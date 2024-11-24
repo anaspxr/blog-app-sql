@@ -43,10 +43,10 @@ export default function AdminUsers() {
               <th className="text-gray-500 text-sm font-normal py-4 px-2">
                 Email
               </th>
-              <th className="text-gray-500 text-sm font-normal py-4 px-2">
+              <th className="text-gray-500 text-sm font-normal py-4 px-2 hidden sm:table-cell">
                 Role
               </th>
-              <th className="text-gray-500 text-sm font-normal py-4 px-2">
+              <th className="text-gray-500 text-sm font-normal py-4 px-2 hidden sm:table-cell">
                 Status
               </th>
             </tr>

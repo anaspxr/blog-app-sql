@@ -13,7 +13,7 @@
       "email": "admin2@gmail.com",
       "password": "admin123",
       "role": "author",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "1",
@@ -21,7 +21,7 @@
       "email": "john.doe@gmail.com",
       "password": "password123",
       "role": "author",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "2",
@@ -29,7 +29,7 @@
       "email": "jane.smith@gmail.com",
       "password": "password456",
       "role": "author",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "3",

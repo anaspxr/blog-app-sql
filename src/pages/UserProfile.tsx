@@ -57,6 +57,7 @@ export default function UserProfile() {
             {posts.map((post) => (
               <PostContent key={post.id} post={post} />
             ))}
+            {posts.length === 0 && <p>No posts found.</p>}
           </div>
         </div>
       )}

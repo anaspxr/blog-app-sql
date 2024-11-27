@@ -14,6 +14,18 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import RoleSelector from "./RoleSelector";
 import { axiosAdmin } from "@/api/axiosAdmin";
 import { toast } from "@/hooks/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "../ui/alert-dialog";
+import { useState } from "react";
 
 export default function UserThreeDot({
   loadingStates,
@@ -33,6 +45,7 @@ export default function UserThreeDot({
     email: string;
     role: string;
     status?: string;
+    isDeleted?: boolean;
   };
   userId: string;
   setUserData: React.Dispatch<
@@ -42,6 +55,7 @@ export default function UserThreeDot({
       email: string;
       role: string;
       status?: string;
+      isDeleted?: boolean;
     }>
   >;
   setLoadingStates: React.Dispatch<
@@ -52,6 +66,8 @@ export default function UserThreeDot({
     }>
   >;
 }) {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const handleBlockUser = () => {
     axiosAdmin
       .patch(`/users/${userId}`, { status: "blocked" })
@@ -82,14 +98,19 @@ export default function UserThreeDot({
 
   const handleDeleteUser = () => {
     axiosAdmin
-      .patch(`/users/${userId}`, { isDeleted: true })
-      .then(() => {})
+      .delete(`/users/${userId}`)
+      .then(() => {
+        toast({
+          title: "Deleted the user successfully",
+        });
+      })
       .catch((error) => {
         toast({
           title: "Error while deleting user",
           description: error.message,
         });
       });
+    setUserData((prev) => ({ ...prev, isDeleted: true }));
   };
 
   return (
@@ -128,7 +149,34 @@ export default function UserThreeDot({
           </DropdownMenuItem>
         )}
         <DropdownMenuItem className="text-red-700 focus:bg-red-200 focus:text-red-600 cursor-pointer">
-          <button onClick={handleDeleteUser}>Delete user</button>
+          <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+            <AlertDialogTrigger
+              className="w-full h-full text-left"
+              onClick={(e) => {
+                e.preventDefault();
+                setDialogOpen(true);
+              }}>
+              Delete user
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>
+                  Are you sure you want to delete this user?
+                </AlertDialogTitle>
+                <AlertDialogDescription>
+                  This action cannot be undone
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction
+                  onClick={handleDeleteUser}
+                  className="bg-red-500 hover:bg-red-600">
+                  Delete user
+                </AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>

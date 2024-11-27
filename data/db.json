@@ -53,7 +53,8 @@
       "name": "Liu Wei",
       "email": "liu.wei@gmail.com",
       "password": "password202",
-      "role": "user"
+      "role": "user",
+      "status": "blocked"
     },
     {
       "id": "6",
@@ -61,7 +62,7 @@
       "email": "fatima.alfarsi@gmail.com",
       "password": "password303",
       "role": "author",
-      "status": "active"
+      "status": "blocked"
     },
     {
       "id": "7",
@@ -69,15 +70,14 @@
       "email": "raj.patel@gmail.com",
       "password": "password404",
       "role": "user",
-      "status": "active"
+      "status": "blocked"
     },
     {
       "id": "8",
       "name": "Sofia Rossi",
       "email": "sofia.rossi@gmail.com",
       "password": "password505",
-      "role": "user",
-      "isDeleted": true
+      "role": "user"
     },
     {
       "id": "19a2",
@@ -87,26 +87,11 @@
       "role": "user"
     },
     {
-      "id": "9dd3",
-      "name": "anas",
-      "email": "anaspp@gmail.com",
-      "password": "anas",
-      "role": "user"
-    },
-    {
       "id": "af11",
       "name": "Anas",
       "email": "Anas2@gmail.com",
       "password": "anas",
       "role": "author",
-      "status": "active"
-    },
-    {
-      "id": "082a",
-      "name": "Basil",
-      "email": "basil@gmail.com",
-      "password": "121212",
-      "role": "user",
       "status": "active"
     }
   ],

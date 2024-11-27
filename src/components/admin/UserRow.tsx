@@ -13,6 +13,7 @@ export default function UserRow({
     email: string;
     role: string;
     status?: string;
+    isDeleted?: boolean;
   };
 }) {
   const [userData, setUserData] = useState(user);
@@ -25,7 +26,7 @@ export default function UserRow({
   });
 
   return (
-    <tr className="border-b">
+    <tr className={`border-b ${userData.isDeleted && "bg-red-200"}`}>
       <td className="py-4 px-2 sm:max-w-32">{user.name}</td>
       <td className="py-4 px-2 sm:max-w-40 text-ellipsis whitespace-nowrap overflow-hidden">
         {user.email}

@@ -46,7 +46,7 @@
       "email": "aisha.khan@gmail.com",
       "password": "password101",
       "role": "author",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "5",
@@ -132,7 +132,7 @@
     {
       "id": "3",
       "title": "Understanding Modern Frontend Frameworks",
-      "body": "Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra augue.",
+      "body": "id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra augue.",
       "author": {
         "name": "Fatima Al-Farsi",
         "email": "fatima.alfarsi@gmail.com"

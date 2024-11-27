@@ -6,10 +6,10 @@ import EditPost from "./EditPost";
 
 export default function PostContent({
   post,
-  setLoginAlert,
+  setLoginAlert = () => {},
 }: {
   post: Post;
-  setLoginAlert: (value: boolean) => void;
+  setLoginAlert?: (value: boolean) => void;
 }) {
   const [liked, setLiked] = useState(false);
   const { user } = useAppSelector((state) => state.user);

@@ -40,6 +40,11 @@ export const loginUser = async (userData: {
   if (!(user.password === userData.password)) {
     throw new Error("Incorrect password.");
   }
+
+  if (user.status === "blocked") {
+    throw new Error("You are blocked by the Admin and can't login!!.");
+  }
+
   Cookies.set("user", JSON.stringify(user));
 
   return user;

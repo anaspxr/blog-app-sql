@@ -30,7 +30,7 @@ export default function RoleSelector({
   const handleUpdateRole = async (value: string) => {
     setLoadingRole(true);
     try {
-      await axiosAdmin.patch(`/users/${userId}`, { role: currentRole });
+      await axiosAdmin.patch(`/users/${userId}`, { role: value });
       setRole(value);
     } catch (error) {
       toast({

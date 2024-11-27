@@ -1,12 +1,10 @@
 import { Link, Outlet, useLocation, useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { MdSpaceDashboard } from "react-icons/md";
 import { HiUsers } from "react-icons/hi2";
 import { IoDocuments } from "react-icons/io5";
 import { IoLogOut } from "react-icons/io5";
 
 const navLinks = [
-  { to: "dashboard", label: "Dashboard", icon: <MdSpaceDashboard /> },
   { to: "users", label: "Users", icon: <HiUsers /> },
   { to: "posts", label: "Posts", icon: <IoDocuments /> },
 ];
@@ -26,7 +24,10 @@ export default function AdminContainer() {
               alt="avatar"
               className="w-12 h-12 rounded-full"
             />
-            <h1>{user.name}</h1>
+            <div>
+              <h1>{user.name}</h1>
+              <p className="text-sm text-gray-500">Admin</p>
+            </div>
           </div>
           <nav className="flex flex-col w-full px-4 gap-2">
             {navLinks.map((link) => (

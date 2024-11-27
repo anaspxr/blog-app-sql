@@ -5,14 +5,15 @@
       "name": "John Smith",
       "email": "admin@gmail.com",
       "password": "admin123",
-      "role": "admin"
+      "role": "admin",
+      "status": "active"
     },
     {
       "id": "222",
       "name": "Admin2",
       "email": "admin2@gmail.com",
       "password": "admin123",
-      "role": "author",
+      "role": "admin",
       "status": "active"
     },
     {
@@ -36,8 +37,8 @@
       "name": "Carlos Mendez",
       "email": "carlos.mendez@gmail.com",
       "password": "password789",
-      "role": "author",
-      "status": "blocked"
+      "role": "user",
+      "status": "active"
     },
     {
       "id": "4",
@@ -59,7 +60,7 @@
       "name": "Fatima Al-Farsi",
       "email": "fatima.alfarsi@gmail.com",
       "password": "password303",
-      "role": "user",
+      "role": "author",
       "status": "active"
     },
     {
@@ -97,7 +98,7 @@
       "name": "Anas",
       "email": "Anas2@gmail.com",
       "password": "anas",
-      "role": "user",
+      "role": "author",
       "status": "active"
     }
   ]

@@ -19,7 +19,6 @@ export const registerUser = async (userData: {
   // register the user
   const newUser = { ...userData, role: "user", status: "active" };
   const { data: user } = await axiosInstance.post("/users", newUser);
-  console.log(user);
   Cookies.set("user", JSON.stringify(user));
   return user;
 };

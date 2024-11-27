@@ -27,7 +27,7 @@ export default function UserProfile() {
       .finally(() => {
         setLoading(false);
       });
-  }, []);
+  }, [user?.email]);
 
   return (
     <div className="flex item-center flex-col gap-4">
@@ -52,7 +52,7 @@ export default function UserProfile() {
           <h1 className="text-3xl mb-4">Your posts</h1>
           {loading && <p>Loading...</p>}
           {error && <p>{error}</p>}
-          {posts.length === 0 && <p>No posts found.</p>}
+          {}
           <div className="my-4 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
             {posts.map((post) => (
               <PostContent key={post.id} post={post} />

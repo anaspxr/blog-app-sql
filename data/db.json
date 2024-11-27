@@ -62,7 +62,7 @@
       "email": "fatima.alfarsi@gmail.com",
       "password": "password303",
       "role": "author",
-      "status": "blocked"
+      "status": "active"
     },
     {
       "id": "7",
@@ -99,7 +99,7 @@
     {
       "id": "1",
       "title": "The Future of Technology",
-      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at arcu vel justo fringilla malesuada.",
+      "body": "Lorem ipsum dolor sit amed gdg t, consectetur adipiscing elit. Fusce at arcu vel justo fringilla malesuada.",
       "author": {
         "name": "John Doe",
         "email": "john.doe@gmail.com"
@@ -108,19 +108,10 @@
     {
       "id": "2",
       "title": "Designing for Accessibility",
-      "body": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum.",
+      "body": "Praesent commodo cud gd fdh frsus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum.",
       "author": {
         "name": "Jane Smith",
         "email": "jane.smith@gmail.com"
-      }
-    },
-    {
-      "id": "3",
-      "title": "Understanding Modern Frontend Frameworks",
-      "body": "id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra augue.",
-      "author": {
-        "name": "Fatima Al-Farsi",
-        "email": "fatima.alfarsi@gmail.com"
       }
     },
     {
@@ -130,33 +121,6 @@
       "author": {
         "name": "Anas",
         "email": "Anas2@gmail.com"
-      }
-    },
-    {
-      "id": "e459",
-      "title": "New Title",
-      "body": "New Body",
-      "author": {
-        "name": "Fatima Al-Farsi",
-        "email": "fatima.alfarsi@gmail.com"
-      }
-    },
-    {
-      "id": "00d9",
-      "title": "new post ",
-      "body": "hi\n",
-      "author": {
-        "name": "Fatima Al-Farsi",
-        "email": "fatima.alfarsi@gmail.com"
-      }
-    },
-    {
-      "id": "ab5f",
-      "title": "New Title",
-      "body": "New Body dgads gf",
-      "author": {
-        "name": "Fatima Al-Farsi",
-        "email": "fatima.alfarsi@gmail.com"
       }
     }
   ]

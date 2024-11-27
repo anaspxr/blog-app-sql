@@ -11,6 +11,7 @@ import { Toaster } from "./components/ui/toaster";
 import PersistLogin from "./components/PersistLogin";
 import Navbar from "./components/Navbar";
 import CreatePost from "./pages/CreatePost";
+import AdminPosts from "./pages/admin-pages/AdminPosts";
 
 function App() {
   return (
@@ -43,7 +44,7 @@ function App() {
             <Route path="/admin" element={<AdminContainer />}>
               <Route index element={<Navigate to="/admin/users" />} />
               <Route path="users" element={<AdminUsers />} />
-              <Route path="posts" element={<div>posts</div>} />
+              <Route path="posts" element={<AdminPosts />} />
             </Route>
           </Route>
         </Routes>

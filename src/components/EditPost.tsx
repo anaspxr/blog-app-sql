@@ -13,7 +13,13 @@ import {
 import { Edit } from "lucide-react";
 import { Post } from "@/lib/types";
 
-export default function EditPost({ post }: { post: Post }) {
+export default function EditPost({
+  post,
+  setPostData,
+}: {
+  post: Post;
+  setPostData: React.Dispatch<React.SetStateAction<Post>>;
+}) {
   const [isSubmitting, setSubmitting] = useState(false);
   const [values, setValues] = useState({ title: post.title, body: post.body });
 
@@ -21,6 +27,7 @@ export default function EditPost({ post }: { post: Post }) {
     setSubmitting(true);
     try {
       await axiosInstance.patch(`/posts/${post.id}`, values);
+      setPostData((prev) => ({ ...prev, ...values }));
     } catch (error) {
       console.error(axiosErrorCatch(error));
     } finally {

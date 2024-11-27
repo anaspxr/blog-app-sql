@@ -44,7 +44,6 @@ export default function LoginForm() {
       },
       validationSchema: loginSchema,
       onSubmit: async (values) => {
-        console.log(values);
         setApiError(null);
         setSubmitting(true);
         setTimeout(async () => {

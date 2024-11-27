@@ -100,6 +100,14 @@
       "password": "anas",
       "role": "author",
       "status": "active"
+    },
+    {
+      "id": "082a",
+      "name": "Basil",
+      "email": "basil@gmail.com",
+      "password": "121212",
+      "role": "user",
+      "status": "active"
     }
   ],
   "posts": [
@@ -137,6 +145,33 @@
       "author": {
         "name": "Anas",
         "email": "Anas2@gmail.com"
+      }
+    },
+    {
+      "id": "e459",
+      "title": "New Title",
+      "body": "New Body",
+      "author": {
+        "name": "Fatima Al-Farsi",
+        "email": "fatima.alfarsi@gmail.com"
+      }
+    },
+    {
+      "id": "00d9",
+      "title": "new post ",
+      "body": "hi\n",
+      "author": {
+        "name": "Fatima Al-Farsi",
+        "email": "fatima.alfarsi@gmail.com"
+      }
+    },
+    {
+      "id": "ab5f",
+      "title": "New Title",
+      "body": "New Body dgads gf",
+      "author": {
+        "name": "Fatima Al-Farsi",
+        "email": "fatima.alfarsi@gmail.com"
       }
     }
   ]

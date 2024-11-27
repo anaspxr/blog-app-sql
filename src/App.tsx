@@ -10,6 +10,7 @@ import AdminUsers from "./pages/admin-pages/AdminUsers";
 import { Toaster } from "./components/ui/toaster";
 import PersistLogin from "./components/PersistLogin";
 import Navbar from "./components/Navbar";
+import CreatePost from "./pages/CreatePost";
 
 function App() {
   return (
@@ -28,6 +29,11 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<UserProfile />} />
             </Route>
+
+            <Route element={<PrivateRoute isAuthorRoute />}>
+              <Route path="/createpost" element={<CreatePost />} />
+            </Route>
+
             <Route path="/login" element={<SignIn />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<NotFound />} />

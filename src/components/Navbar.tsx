@@ -21,13 +21,17 @@ export default function Navbar() {
       </Link>
       <div className="flex items-center gap-2">
         {user?.role === "admin" && (
-          <Link to="/admin" className="text-blue-600 hover:underline">
+          <Link
+            to="/admin"
+            className="text-blue-800 bg-blue-100 rounded-sm py-1 px-2 hover:bg-blue-200">
             Admin Panel
           </Link>
         )}
 
         {user?.role === "author" && (
-          <Link to="/author" className="text-blue-600 hover:underline">
+          <Link
+            to="/createpost"
+            className="text-blue-800 bg-blue-100 rounded-sm py-1 px-2 hover:bg-blue-200">
             Create Post
           </Link>
         )}
@@ -45,7 +49,7 @@ export default function Navbar() {
                 {user.name} <ChevronDown />
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
+            <DropdownMenuContent align="end" className="w-full">
               <Link to="/profile" className="block hover:bg-zinc-100">
                 <DropdownMenuItem className="focus:cursor-pointer">
                   Profile

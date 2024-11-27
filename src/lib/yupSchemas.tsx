@@ -21,4 +21,9 @@ const loginSchema = object().shape({
     .required("Password is required"),
 });
 
-export { registerSchema, loginSchema };
+const createPostSchema = object().shape({
+  title: string().required("Title is required"),
+  body: string().required("Body is required"),
+});
+
+export { registerSchema, loginSchema, createPostSchema };

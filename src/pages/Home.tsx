@@ -1,34 +1,42 @@
-import { useAppSelector } from "@/lib/store/hooks";
-import { logoutUser } from "@/lib/store/slices/userSlice";
-import Cookies from "js-cookie";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import axiosInstance from "@/api/axios";
+import LoginAlert from "@/components/LoginAlert";
+import PostContent from "@/components/PostContent";
+import { Post } from "@/lib/types";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  const { user } = useAppSelector((state) => state.user);
-  const dispatch = useDispatch();
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [alertOpen, setOpen] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    setError(null);
+    axiosInstance
+      .get("/posts")
+      .then((res) => {
+        setPosts(res.data);
+      })
+      .catch((error) => {
+        setError(error.message);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  }, []);
 
   return (
-    <div className="flex items-center justify-center flex-col gap-4">
-      <h1 className="text-blue-500 text-4xl font-semibold">RBAC</h1>
-      {user ? (
-        <>
-          <p>Welcome to the Home page, {user?.name} </p>
-          <p>Your role is {user?.role}</p>
-          <button
-            onClick={() => {
-              Cookies.remove("user");
-              dispatch(logoutUser());
-            }}>
-            Logout
-          </button>
-        </>
-      ) : (
-        <>
-          <p>You are not logged in</p>
-          <Link to="/login">Login</Link>
-        </>
-      )}
+    <div className="p-4">
+      <h1 className="text-2xl  mb-4">Top posts by authors</h1>
+      {loading && <p>Loading...</p>}
+      {error && <p>{error}</p>}
+      <div className="my-4 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {posts.map((post) => (
+          <PostContent setLoginAlert={setOpen} key={post.id} post={post} />
+        ))}
+      </div>
+      <LoginAlert alertOpen={alertOpen} setAlertOpen={setOpen} />
     </div>
   );
 }

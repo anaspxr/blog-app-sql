@@ -101,5 +101,43 @@
       "role": "author",
       "status": "active"
     }
+  ],
+  "posts": [
+    {
+      "id": "1",
+      "title": "The Future of Technology",
+      "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce at arcu vel justo fringilla malesuada.",
+      "author": {
+        "name": "John Doe",
+        "email": "john.doe@gmail.com"
+      }
+    },
+    {
+      "id": "2",
+      "title": "Designing for Accessibility",
+      "body": "Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis lacus vel augue laoreet rutrum.",
+      "author": {
+        "name": "Jane Smith",
+        "email": "jane.smith@gmail.com"
+      }
+    },
+    {
+      "id": "3",
+      "title": "Understanding Modern Frontend Frameworks",
+      "body": "Vestibulum id ligula porta felis euismod semper. Nulla vitae elit libero, a pharetra augue.",
+      "author": {
+        "name": "Fatima Al-Farsi",
+        "email": "fatima.alfarsi@gmail.com"
+      }
+    },
+    {
+      "id": "4",
+      "title": "Best Practices for Web Development",
+      "body": "Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Maecenas faucibus mollis interdum.",
+      "author": {
+        "name": "Anas",
+        "email": "Anas2@gmail.com"
+      }
+    }
   ]
 }

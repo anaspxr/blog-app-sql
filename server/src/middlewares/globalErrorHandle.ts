@@ -12,11 +12,10 @@ const globalErrorHandle = (
   }
 
   if (error instanceof ZodError) {
-    res
-      .status(400)
-      .json({
-        message: `Invalid data, ${error.errors[0].path}: ${error.errors[0].message}`,
-      });
+    res.status(400).json({
+      message: `Invalid data, ${error.errors[0].path}: ${error.errors[0].message}`,
+    });
+    return;
   }
 
   if (!error) res.status(404).json({ message: "Unknown error occurred" });

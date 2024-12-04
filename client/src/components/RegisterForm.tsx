@@ -4,21 +4,40 @@ import { registerSchema } from "../lib/yupSchemas";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosErrorCatch } from "../api/axiosErrorCatch";
-import { registerUser } from "../api/actions/authActions";
-import { loginUser as loginUserReducer } from "../lib/store/slices/userSlice";
 import { useDispatch } from "react-redux";
+import axiosInstance from "@/api/axios";
+import Cookies from "js-cookie";
+import { loginUser } from "@/lib/store/slices/userSlice";
 
 const formFields: {
   label: string;
   type: string;
-  name: "name" | "email" | "password" | "confirmPassword";
+  name:
+    | "username"
+    | "email"
+    | "password"
+    | "confirmPassword"
+    | "firstName"
+    | "lastName";
   placeHolder: string;
 }[] = [
   {
-    label: "Name",
+    label: "First Name",
     type: "text",
-    name: "name",
-    placeHolder: "Enter your name",
+    name: "firstName",
+    placeHolder: "John",
+  },
+  {
+    label: "Last Name",
+    type: "text",
+    name: "lastName",
+    placeHolder: "Doe",
+  },
+  {
+    label: "Username",
+    type: "text",
+    name: "username",
+    placeHolder: "Your unique username",
   },
   {
     label: "Email",
@@ -56,7 +75,9 @@ export default function RegisterForm() {
     setErrors,
   } = useFormik({
     initialValues: {
-      name: "",
+      username: "",
+      firstName: "",
+      lastName: "",
       email: "",
       password: "",
       confirmPassword: "",
@@ -69,22 +90,17 @@ export default function RegisterForm() {
         return;
       }
       setSubmitting(true);
-      setTimeout(async () => {
-        // time out to simulate a server request
-        try {
-          const user = await registerUser({
-            name: values.name,
-            email: values.email,
-            password: values.password,
-          });
-          dispatch(loginUserReducer(user));
-          navigate("/"); // after successful registration, user is logged in and redirected to home page
-        } catch (error) {
-          setApiError(axiosErrorCatch(error));
-        } finally {
-          setSubmitting(false);
-        }
-      }, 1000);
+      try {
+        const { data } = await axiosInstance.post("/user/register", values);
+        const token = data.token;
+        Cookies.set("token", token);
+        dispatch(loginUser(data.user));
+        navigate("/");
+      } catch (error) {
+        setApiError(axiosErrorCatch(error));
+      } finally {
+        setSubmitting(false);
+      }
     },
   });
 
@@ -92,46 +108,51 @@ export default function RegisterForm() {
     <div className="flex items-center justify-center">
       <form
         onSubmit={handleSubmit}
-        className="w-full bg-white max-w-lg rounded-md border shadow-sm m-2 p-4 flex justify-center flex-col gap-4">
+        className="w-full bg-white max-w-screen-lg rounded-md border shadow-sm m-2 p-4 flex justify-center flex-col gap-4">
         <h1 className="text-3xl font-semibold text-blue-600 text-center my-8">
           Sign Up
         </h1>
-        {formFields.map((field) => (
-          <div key={field.name} className="flex flex-col">
-            <label className="font-semibold" htmlFor={field.name}>
-              {field.label}
-            </label>
-            <input
-              className="border rounded-md h-10 p-2 border-zinc-500"
-              type={field.type}
-              placeholder={field.placeHolder}
-              name={field.name}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              value={values[field.name]}
-              id={field.name}
-              required
-            />
-            {touched[field.name] && errors[field.name] && (
-              <p className="text-sm font-semibold text-red-500">
-                {errors[field.name]}
-              </p>
-            )}
-          </div>
-        ))}
-        {apiError && <p className="text-sm text-red-500">{apiError}</p>}
-        <button
-          type="submit"
-          className="bg-blue-600 text-white rounded-md h-10 hover:opacity-90 text-lg">
-          {isSubmitting ? <ClipLoader color="white" size={20} /> : "Register"}{" "}
-        </button>
-        <p>
-          Already have an account?{" "}
-          <Link className=" text-blue-700 hover:underline" to="/login">
-            {" "}
-            Login
-          </Link>
-        </p>
+        <div className="grid sm:grid-cols-2 gap-4">
+          {formFields.map((field) => (
+            <div key={field.name} className="flex flex-col">
+              <label className="font-semibold" htmlFor={field.name}>
+                {field.label}
+              </label>
+              <input
+                className="border rounded-md h-10 p-2 border-zinc-500"
+                type={field.type}
+                placeholder={field.placeHolder}
+                name={field.name}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values[field.name]}
+                id={field.name}
+                required
+              />
+              {touched[field.name] && errors[field.name] && (
+                <p className="text-sm font-semibold text-red-500">
+                  {errors[field.name]}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="min-h-2">
+          {apiError && <p className="text-sm text-red-500">{apiError}</p>}
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4 items-center">
+          <button
+            type="submit"
+            className="bg-blue-600 text-white rounded-md h-10 hover:opacity-90 text-lg">
+            {isSubmitting ? <ClipLoader color="white" size={20} /> : "Register"}{" "}
+          </button>
+          <p>
+            Already have an account?{" "}
+            <Link className=" text-blue-700 hover:underline" to="/login">
+              Login
+            </Link>
+          </p>
+        </div>
       </form>
     </div>
   );

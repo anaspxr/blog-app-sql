@@ -4,9 +4,10 @@ import { loginSchema } from "../lib/yupSchemas";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { axiosErrorCatch } from "../api/axiosErrorCatch";
-import { loginUser } from "../api/actions/authActions";
-import { loginUser as loginUserReducer } from "../lib/store/slices/userSlice";
-import { useDispatch } from "react-redux";
+import { useAppDispatch } from "@/lib/store/hooks";
+import axiosInstance from "@/api/axios";
+import Cookies from "js-cookie";
+import { loginUser } from "@/lib/store/slices/userSlice";
 
 const formFields: {
   label: string;
@@ -15,10 +16,10 @@ const formFields: {
   placeHolder: string;
 }[] = [
   {
-    label: "Email",
-    type: "email",
+    label: "Email or Username",
+    type: "text",
     name: "email",
-    placeHolder: "example@gmail.com",
+    placeHolder: "Enter your email or username",
   },
   {
     label: "Password",
@@ -31,36 +32,30 @@ const formFields: {
 export default function LoginForm() {
   const [isSubmitting, setSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const { values, errors, handleSubmit, touched, handleBlur, handleChange } =
     useFormik({
       initialValues: {
-        name: "",
         email: "",
         password: "",
-        confirmPassword: "",
       },
       validationSchema: loginSchema,
       onSubmit: async (values) => {
         setApiError(null);
         setSubmitting(true);
-        setTimeout(async () => {
-          // time out to simulate a server request
-          try {
-            const user = await loginUser({
-              email: values.email,
-              password: values.password,
-            });
-            dispatch(loginUserReducer(user));
-            navigate("/");
-          } catch (error) {
-            setApiError(axiosErrorCatch(error));
-          } finally {
-            setSubmitting(false);
-          }
-        }, 1000);
+        try {
+          const { data } = await axiosInstance.post("/user/login", values);
+          const token = data.token;
+          Cookies.set("token", token);
+          dispatch(loginUser(data.user));
+          navigate("/");
+        } catch (error) {
+          setApiError(axiosErrorCatch(error));
+        } finally {
+          setSubmitting(false);
+        }
       },
     });
 

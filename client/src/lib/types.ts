@@ -1,9 +1,12 @@
 export type User = {
   id: string;
-  name: string;
+  username: string;
+  firstName: string;
+  lastName: string;
   email: string;
   role: string;
-  status?: string;
+  status: string;
+  image?: string;
 };
 
 export type Post = {
@@ -11,7 +14,9 @@ export type Post = {
   title: string;
   body: string;
   author: {
-    name: string;
+    username: string;
+    firstName: string;
+    lastName: string;
     email: string;
   };
 };

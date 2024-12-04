@@ -1,27 +1,30 @@
 import express, { NextFunction, Request, Response } from "express";
 import pool from "./configs/db";
+import dotenv from "dotenv";
+import globalErrorHandle from "./middlewares/globalErrorHandle";
+import userRouter from "./routes/userRoutes";
+import cors from "cors";
+
+dotenv.config();
 
 const app = express();
-const port = 3000;
 
-app.get("/", (req, res) => {
-  res.send("Hello World!");
+const port = process.env.PORT || 3000;
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+  })
+);
+
+app.use("/user", userRouter);
+
+app.use("*", (req, res) => {
+  res.status(404).json({ message: `Cannot ${req.method} ${req.originalUrl}` });
 });
 
-app.get("/users", async (req, res) => {
-  try {
-    const [rows] = await pool.query("SELECT * FROM users");
-    res.json(rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send("Server error");
-  }
-});
-
-app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
-  console.error(err.stack);
-  res.status(500).json({ message: "Something broke!" });
-});
+app.use(globalErrorHandle);
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);

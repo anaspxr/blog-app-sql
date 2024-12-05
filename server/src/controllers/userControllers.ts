@@ -105,7 +105,7 @@ export const userLogin = async (req: Request, res: Response) => {
   });
 };
 
-export const getUserProfile = async (req: PrivateRequest, res: Response) => {
+export const getOwnProfile = async (req: PrivateRequest, res: Response) => {
   const id = req.userId;
   const [result] = await pool.query<RowDataPacket[]>(
     `SELECT id, username, email, firstName, lastName, image FROM users WHERE id = ?`,

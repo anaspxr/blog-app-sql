@@ -1,6 +1,6 @@
 import { Router } from "express";
 import {
-  getUserProfile,
+  getOwnProfile,
   userLogin,
   userRegister,
 } from "../controllers/userControllers";
@@ -14,6 +14,6 @@ userRouter.post("/login", errorCatch(userLogin));
 
 userRouter.use(verifyToken);
 
-userRouter.get("/profile", errorCatch(getUserProfile));
+userRouter.get("/profile", errorCatch(getOwnProfile));
 
 export default userRouter;

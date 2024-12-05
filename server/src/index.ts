@@ -5,6 +5,7 @@ import globalErrorHandle from "./middlewares/globalErrorHandle";
 import userRouter from "./routes/userRoutes";
 import cors from "cors";
 import adminRouter from "./routes/adminRoutes";
+import publicRouter from "./routes/publicRoutes";
 
 dotenv.config();
 
@@ -19,8 +20,9 @@ app.use(
   })
 );
 
-app.use("/admin", adminRouter);
+app.use("/public", publicRouter);
 app.use("/user", userRouter);
+app.use("/admin", adminRouter);
 
 app.use("*", (req, res) => {
   res.status(404).json({ message: `Cannot ${req.method} ${req.originalUrl}` });

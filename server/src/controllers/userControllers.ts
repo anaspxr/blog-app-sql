@@ -7,6 +7,7 @@ import pool from "../configs/db";
 import { ResultSetHeader, RowDataPacket } from "mysql2";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import { PrivateRequest } from "../lib/types";
 
 export const userRegister = async (req: Request, res: Response) => {
   const { username, email, password, firstName, lastName } =
@@ -40,19 +41,15 @@ export const userRegister = async (req: Request, res: Response) => {
   const token = jwt.sign(
     {
       id: user.insertId,
-      username,
-      email,
     },
     process.env.JWT_SECRET!
   );
 
-  res
-    .status(201)
-    .json({
-      message: "User registered successfully",
-      token,
-      user: { id: user.insertId, username, email, firstName, lastName },
-    });
+  res.status(201).json({
+    message: "User registered successfully",
+    token,
+    user: { id: user.insertId, username, email, firstName, lastName },
+  });
 };
 
 export const userLogin = async (req: Request, res: Response) => {
@@ -95,8 +92,6 @@ export const userLogin = async (req: Request, res: Response) => {
   const token = jwt.sign(
     {
       id: user.id,
-      username: user.username,
-      email: user.email,
     },
     process.env.JWT_SECRET!
   );
@@ -108,4 +103,20 @@ export const userLogin = async (req: Request, res: Response) => {
     token,
     user: userWithoutPassword,
   });
+};
+
+export const getUserProfile = async (req: PrivateRequest, res: Response) => {
+  const id = req.userId;
+  const [result] = await pool.query<RowDataPacket[]>(
+    `SELECT id, username, email, firstName, lastName, image FROM users WHERE id = ?`,
+    [id]
+  );
+
+  const user = result[0];
+
+  if (!user) {
+    throw new Error("User not found");
+  }
+
+  res.status(200).json(user);
 };

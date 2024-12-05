@@ -1,12 +1,19 @@
 import { Router } from "express";
-import pool from "../configs/db";
-import { userLogin, userRegister } from "../controllers/userControllers";
+import {
+  getUserProfile,
+  userLogin,
+  userRegister,
+} from "../controllers/userControllers";
 import errorCatch from "../lib/utils/errorCatch";
-import { registerSchema } from "../lib/validationSchemas/userValidate";
+import { verifyToken } from "../middlewares/verifyToken";
 
 const userRouter = Router();
 
 userRouter.post("/register", errorCatch(userRegister));
 userRouter.post("/login", errorCatch(userLogin));
+
+userRouter.use(verifyToken);
+
+userRouter.get("/profile", errorCatch(getUserProfile));
 
 export default userRouter;

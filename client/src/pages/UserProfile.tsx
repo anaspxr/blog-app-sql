@@ -1,64 +1,51 @@
 import axiosInstance from "@/api/axios";
-import PostContent from "@/components/PostContent";
-import { useAppDispatch, useAppSelector } from "@/lib/store/hooks";
-import { logoutUserFromStore } from "@/lib/store/slices/userSlice";
-import { Post } from "@/lib/types";
-import Cookies from "js-cookie";
+import { axiosErrorCatch } from "@/api/axiosErrorCatch";
+import UserDetails from "@/components/user-profile/UserDetails";
+import UserPosts from "@/components/user-profile/UserPosts";
+import { useAppSelector } from "@/lib/store/hooks";
+import { User } from "@/lib/types";
 import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 
 export default function UserProfile() {
-  const { user } = useAppSelector((state) => state.user);
-  const [posts, setPosts] = useState<Post[]>([]);
+  const { user: currentUser } = useAppSelector((state) => state.user);
+
+  const [userData, setUserData] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const dispatch = useAppDispatch();
+
+  const { username } = useParams();
+
+  const isOwnProfile = currentUser?.username === username;
 
   useEffect(() => {
     setLoading(true);
     setError(null);
     axiosInstance
-      .get("/posts")
+      .get(`public/userprofile/${username}`)
       .then((res) => {
-        setPosts(res.data?.filter((p: Post) => p.author.email === user?.email));
+        setUserData(res.data);
+        setLoading(false);
       })
-      .catch((error) => {
-        setError(error.message);
-      })
-      .finally(() => {
+      .catch((err) => {
+        setUserData(null);
+        setError(axiosErrorCatch(err));
         setLoading(false);
       });
-  }, [user?.email]);
+  }, [username]);
+
+  if (!username) return <p>Username not found</p>;
 
   return (
     <div className="flex item-center flex-col gap-4">
       <div className="mx-4 rounded-md border shadow-md p-8 bg-white">
-        <h1 className="text-4xl mb-4">Profile</h1>
-        <div>
-          <p className="sm:text-xl">
-            Name: {user?.firstName} {user?.lastName}
-          </p>
-          <p className="sm:text-xl">Email: {user?.email}</p>
-        </div>
-        <button
-          className="text-white max-w-40 bg-orange-500 hover:bg-opacity-90 p-2 rounded-md w-full mt-4"
-          onClick={() => {
-            Cookies.remove("admin");
-            dispatch(logoutUserFromStore());
-          }}>
-          Logout
-        </button>
-      </div>
-      <div className="mx-4 p-8">
-        <h1 className="text-3xl mb-4">Your posts</h1>
         {loading && <p>Loading...</p>}
-        {error && <p>{error}</p>}
-        <div className="my-4 grid sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {posts.map((post) => (
-            <PostContent key={post.id} post={post} />
-          ))}
-          {posts.length === 0 && <p>No posts found.</p>}
-        </div>
+        {error && <p className="text-red-500">{error}</p>}
+        {userData && (
+          <UserDetails userData={userData} isOwnProfile={isOwnProfile} />
+        )}
       </div>
+      <UserPosts username={username} />
     </div>
   );
 }

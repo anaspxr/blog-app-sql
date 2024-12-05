@@ -28,9 +28,9 @@ function App() {
               </div>
             }>
             <Route index element={<Home />} />
+            <Route path="/:username" element={<UserProfile />} />
 
             <Route element={<PrivateRoute />}>
-              <Route path="/profile" element={<UserProfile />} />
               <Route path="/createpost" element={<CreatePost />} />
             </Route>
 

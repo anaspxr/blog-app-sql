@@ -8,8 +8,10 @@ const registerSchema = object().shape({
     .min(4, "Password must be at least 4 characters")
     .required("Password is required"),
   username: string()
+    .required("Username is required")
     .min(3, "Username must be at least 3 characters")
-    .required("Username is required"),
+    .max(20, "Username must be at most 20 characters"),
+
   firstName: string()
     .min(1, "First name is required")
     .required("First name is required"),

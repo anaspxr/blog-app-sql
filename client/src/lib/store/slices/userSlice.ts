@@ -1,5 +1,6 @@
 import { Admin, User } from "@/lib/types";
 import { createSlice } from "@reduxjs/toolkit";
+import { reLoginUser } from "../thunks/userThunks";
 
 interface UserState {
   user: User | null;
@@ -44,6 +45,20 @@ const userSlice = createSlice({
     logoutAdminFromStore: (state) => {
       state.admin = null;
     },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(reLoginUser.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(reLoginUser.fulfilled, (state, action) => {
+      state.user = action.payload;
+      state.loading = false;
+    });
+    builder.addCase(reLoginUser.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.payload as string;
+    });
   },
 });
 

@@ -12,7 +12,7 @@ const axiosPrivate = axios.create({
 
 axiosPrivate.interceptors.request.use(
   async (config) => {
-    const token = JSON.parse(Cookies.get("token") || "{}");
+    const token = Cookies.get("token");
     if (token) {
       config.headers.Authorization = `Bearer ${token}`;
     }

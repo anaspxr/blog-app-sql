@@ -1,14 +1,17 @@
+import { useAppDispatch } from "@/lib/store/hooks";
+import { reLoginUser } from "@/lib/store/thunks/userThunks";
+import Cookies from "js-cookie";
+import { useEffect } from "react";
+
 export default function PersistLogin({
   children,
 }: {
   children: React.ReactNode;
 }) {
-  // if (loading)
-  //   return (
-  //     <div className="h-screen w-screen flex items-center justify-center">
-  //       <Loader />
-  //     </div>
-  //   );
-
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    const token = Cookies.get("token");
+    if (token) dispatch(reLoginUser());
+  });
   return <>{children}</>;
 }

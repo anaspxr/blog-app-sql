@@ -9,9 +9,10 @@ import AdminContainer from "./components/admin/AdminContainer";
 import AdminUsers from "./pages/admin-pages/AdminUsers";
 import { Toaster } from "./components/ui/toaster";
 import PersistLogin from "./components/PersistLogin";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/navbar/Navbar";
 import CreatePost from "./pages/CreatePost";
 import AdminPosts from "./pages/admin-pages/AdminPosts";
+import AdminLogin from "./pages/admin-pages/AdminLogin";
 
 function App() {
   return (
@@ -27,15 +28,14 @@ function App() {
               </div>
             }>
             <Route index element={<Home />} />
+
             <Route element={<PrivateRoute />}>
               <Route path="/profile" element={<UserProfile />} />
-            </Route>
-
-            <Route element={<PrivateRoute isAuthorRoute />}>
               <Route path="/createpost" element={<CreatePost />} />
             </Route>
 
             <Route path="/login" element={<SignIn />} />
+            <Route path="/adminlogin" element={<AdminLogin />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path="*" element={<NotFound />} />
           </Route>

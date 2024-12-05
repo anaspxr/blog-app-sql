@@ -7,7 +7,7 @@ import { axiosErrorCatch } from "../api/axiosErrorCatch";
 import { useDispatch } from "react-redux";
 import axiosInstance from "@/api/axios";
 import Cookies from "js-cookie";
-import { loginUser } from "@/lib/store/slices/userSlice";
+import { loginUserToStore } from "@/lib/store/slices/userSlice";
 
 const formFields: {
   label: string;
@@ -94,7 +94,7 @@ export default function RegisterForm() {
         const { data } = await axiosInstance.post("/user/register", values);
         const token = data.token;
         Cookies.set("token", token);
-        dispatch(loginUser(data.user));
+        dispatch(loginUserToStore(data.user));
         navigate("/");
       } catch (error) {
         setApiError(axiosErrorCatch(error));
@@ -113,12 +113,13 @@ export default function RegisterForm() {
           Sign Up
         </h1>
         <div className="grid sm:grid-cols-2 gap-4">
-          {formFields.map((field) => (
+          {formFields.map((field, i) => (
             <div key={field.name} className="flex flex-col">
               <label className="font-semibold" htmlFor={field.name}>
                 {field.label}
               </label>
               <input
+                autoFocus={i === 0}
                 className="border rounded-md h-10 p-2 border-zinc-500"
                 type={field.type}
                 placeholder={field.placeHolder}

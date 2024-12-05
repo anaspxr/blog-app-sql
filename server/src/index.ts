@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import globalErrorHandle from "./middlewares/globalErrorHandle";
 import userRouter from "./routes/userRoutes";
 import cors from "cors";
+import adminRouter from "./routes/adminRoutes";
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(
   })
 );
 
+app.use("/admin", adminRouter);
 app.use("/user", userRouter);
 
 app.use("*", (req, res) => {

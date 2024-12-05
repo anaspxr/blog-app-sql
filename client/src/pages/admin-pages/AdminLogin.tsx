@@ -1,13 +1,13 @@
 import { useFormik } from "formik";
 import { ClipLoader } from "react-spinners";
-import { loginSchema } from "../lib/yupSchemas";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { axiosErrorCatch } from "../api/axiosErrorCatch";
+import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/lib/store/hooks";
 import axiosInstance from "@/api/axios";
 import Cookies from "js-cookie";
-import { loginUserToStore } from "@/lib/store/slices/userSlice";
+import { loginAdminToStore } from "@/lib/store/slices/userSlice";
+import { axiosErrorCatch } from "@/api/axiosErrorCatch";
+import { loginSchema } from "@/lib/yupSchemas";
 
 const formFields: {
   label: string;
@@ -16,10 +16,10 @@ const formFields: {
   placeHolder: string;
 }[] = [
   {
-    label: "Email or Username",
-    type: "text",
+    label: "Email",
+    type: "email",
     name: "email",
-    placeHolder: "Enter your email or username",
+    placeHolder: "Enter your email",
   },
   {
     label: "Password",
@@ -29,7 +29,7 @@ const formFields: {
   },
 ];
 
-export default function LoginForm() {
+export default function AdminLogin() {
   const [isSubmitting, setSubmitting] = useState(false);
   const [apiError, setApiError] = useState<string | null>(null);
   const dispatch = useAppDispatch();
@@ -46,11 +46,10 @@ export default function LoginForm() {
         setApiError(null);
         setSubmitting(true);
         try {
-          const { data } = await axiosInstance.post("/user/login", values);
-          const token = data.token;
-          Cookies.set("token", token);
-          dispatch(loginUserToStore(data.user));
-          navigate("/");
+          const { data } = await axiosInstance.post("/admin/login", values);
+          Cookies.set("adminToken", data.token);
+          dispatch(loginAdminToStore(data.admin));
+          navigate("/admin");
         } catch (error) {
           setApiError(axiosErrorCatch(error));
         } finally {
@@ -65,7 +64,7 @@ export default function LoginForm() {
         onSubmit={handleSubmit}
         className="w-full bg-white max-w-lg rounded-md border shadow-sm m-2 p-4 flex justify-center flex-col gap-4">
         <h1 className="text-3xl font-semibold text-blue-600 text-center my-8">
-          Login
+          Admin Login
         </h1>
         {formFields.map((field, i) => (
           <div key={field.name} className="flex flex-col">
@@ -97,13 +96,6 @@ export default function LoginForm() {
           className="bg-blue-600 text-white rounded-md h-10 hover:opacity-90 text-lg">
           {isSubmitting ? <ClipLoader color="white" size={20} /> : "Login"}{" "}
         </button>
-        <p>
-          Don't have an account?{" "}
-          <Link className=" text-blue-700 hover:underline" to="/signup">
-            {" "}
-            Sign Up
-          </Link>
-        </p>
       </form>
     </div>
   );

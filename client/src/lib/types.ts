@@ -4,9 +4,14 @@ export type User = {
   firstName: string;
   lastName: string;
   email: string;
-  role: string;
-  status: string;
   image?: string;
+};
+
+export type Admin = {
+  id: string;
+  username: string;
+  name: string;
+  email: string;
 };
 
 export type Post = {
